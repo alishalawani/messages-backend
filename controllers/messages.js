@@ -33,6 +33,7 @@ router.post('/', (req, res) => {
 		})
 		.catch(console.error);
 });
+
 //update a message by id
 router.put('/:id', (req, res) => {
 	Message.findOneAndUpdate({ _id: req.params.id })
@@ -47,6 +48,15 @@ router.put('/:id', (req, res) => {
 });
 
 //delete message by id
-
-router.delete('/:gif')
+router.delete('/:id', (req, res) => {
+	Message.findOneAndDelete({ _id: req.params.id })
+		.then(() => {
+			Message.find({})
+				.then((messages) => {
+					res.json(messages);
+				})
+				.catch(console.error);
+		})
+		.catch(console.error);
+});
 module.exports = router;
