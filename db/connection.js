@@ -4,7 +4,7 @@ mongoose.Promise = Promise;
 const mongoURI =
 	process.env.NODE_ENV === 'production'
 		? process.env.DB_URL
-		: 'mongodb://localhost/messages';
+		: 'mongodb://localhost/message-board';
 
 mongoose
 	.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
