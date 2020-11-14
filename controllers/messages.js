@@ -24,10 +24,29 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
 	const newMessage = req.body;
 	Message.create(newMessage)
-		.then((message) => {
-			res.json(message);
+		.then(() => {
+			Message.find({})
+				.then((messages) => {
+					res.json(messages);
+				})
+				.catch(console.error);
+		})
+		.catch(console.error);
+});
+//update a message by id
+router.put('/:id', (req, res) => {
+	Message.findOneAndUpdate({ _id: req.params.id })
+		.then(() => {
+			Message.find({})
+				.then((messages) => {
+					res.json(messages);
+				})
+				.catch(console.error);
 		})
 		.catch(console.error);
 });
 
+//delete message by id
+
+router.delete('/:gif')
 module.exports = router;
