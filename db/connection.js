@@ -1,3 +1,18 @@
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/messages');
+mongoose.Promise = Promise;
+
+const mongoURI =
+	process.env.NODE_ENV === 'production'
+		? process.env.DB_URL
+		: 'mongodb://localhost/messages';
+
+mongoose
+	.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then((conn) => {
+		console.log(`connected to mongodb on ${conn.connections[0].name} db`);
+	})
+	.catch((error) => {
+		console.error(error);
+	});
+
 module.exports = mongoose;
