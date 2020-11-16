@@ -7,7 +7,7 @@ Message.deleteMany({}).then(()=>{
     })
 
     Message.create({
-        subject: "Second board message",
-        message: "I think it is time to start the frontend portion or message board"
+        subject: "A reply to First board message",
+        message: "This is the second board message"
     })
 }).catch(console.error)
